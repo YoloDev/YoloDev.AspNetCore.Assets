@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <Target Name="BuildWebpack" BeforeTargets="Build">
+    <Message Text="Building webpack" />
     <Exec Command="npm run build" />
   </Target>
 </Project>
