@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "babel-preset-env": "^1.5.2",
+    "babel-register": "^6.24.1",
+    "ts-loader": "^2.2.1",
+    "typescript": "^2.4.1",
+    "webpack": "^3.0.0",
+    "webpack-assets-manifest": "^0.7.0",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "domready": "^1.0.8"
+  },
+  "scripts": {
+    "build": "webpack"
+  }
+}
