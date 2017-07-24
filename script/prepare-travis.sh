@@ -3,3 +3,7 @@ if ! [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
 elif [[ "$(git rev-parse --abbrev-ref HEAD)" == "HEAD" ]]; then
   git checkout -B "$TRAVIS_BRANCH"
 fi
+
+pushd sample/SampleApp
+npm install
+popd

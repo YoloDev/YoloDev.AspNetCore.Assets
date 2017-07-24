@@ -41,11 +41,6 @@ if test ! -d $buildFolder; then
   if test -d $tempFolder; then
     rm -rf $tempFolder
   fi
-
-  # Npm install
-  pushd sample/SampleApp
-  npm install
-  popd
 fi
 
 $buildFile -r $repoFolder "$@"
