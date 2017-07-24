@@ -29,3 +29,8 @@ deploy:
     name: YoloDev MyGet
     on:
       branch: master
+
+  - provider: Environment
+    name: NuGet Central
+    on:
+      appveyor_repo_tag: true
