@@ -1,0 +1,8 @@
+<Project>
+  <Target Name="SetVersion" BeforeTargets="Build">
+    <Exec Command="bash '$(MSBuildThisFileDirectory)script\git-version.sh' get" ConsoleToMSBuild="true" StandardOutputImportance="Low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="Version" />
+    </Exec>
+    <Message Text="Version: $(Version)" Importance="High" />
+  </Target>
+</Project>

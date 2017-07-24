@@ -1,7 +1,6 @@
 init:
   - git config --global core.autocrlf true
-build_script:
-  - ps: .\build.ps1
+
 clone_depth: 1
 test: off
 deploy: off
@@ -9,12 +8,15 @@ os: Visual Studio 2017
 environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
 install:
   - cmd: git fetch --tags --depth 50
   - cmd: git fetch --tags origin master:master
   - cmd: bash ./script/prepare-appveyor.sh
   - ps: Install-Product node ''
-  - cmd: |-
-        pushd sample/SampleApp
-        npm install
-        popd
+
+before_build:
+  - cmd: bash ./script/git-version.sh --verbose get
+
+build_script:
+  - ps: .\build.ps1

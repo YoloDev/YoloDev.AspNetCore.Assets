@@ -6,6 +6,7 @@
 
 REGEX_SEMVER="^v([0-9]+)\.([0-9]+)\.([0-9]+)$"
 REGEX_BRANCH="^[a-z/]+/(.*)$"
+REGEX_VERSION_SPLIT="^([0-9]+\.[0-9]+\.[0-9]+)([-+].*)?$"
 DIR_ROOT="$(git rev-parse --show-toplevel 2> /dev/null)"
 CHANGELOG="CHANGELOG.md"
 
@@ -289,6 +290,38 @@ function get-version() {
   echo "$nextVersion$branchMeta"
 }
 
+function create-version-props() {
+  eval $invocation
+  local version_string=$(get-version)
+  say_set "version_string" "$version"
+
+  # if [[ "$version_string" =~ $REGEX_VERSION_SPLIT ]]; then
+  #   local prefix=${BASH_REMATCH[1]}
+  #   local suffix=${BASH_REMATCH[2]}
+
+  #   say_set "prefix" "$prefix"
+  #   say_set "suffix" "$suffix"
+
+  #   echo "<!-- This file may be overwritten by automation. Only values allowed here are VersionPrefix and VersionSuffix.  -->"
+  #   echo "<Project>"
+  #   echo "    <PropertyGroup>"
+  #   echo "        <VersionPrefix>$prefix</VersionPrefix>"
+  #   echo "        <VersionSuffix>$suffix</VersionSuffix>"
+  #   echo "    </PropertyGroup>"
+  #   echo "</Project>"
+  # else
+  #   say_err "Version does not fit regex (script error)."
+  #   exit 1
+  # fi
+
+  echo "<!-- This file may be overwritten by automation. Only values allowed here are VersionPrefix and VersionSuffix.  -->"
+  echo "<Project>"
+  echo "    <PropertyGroup>"
+  echo "        <Version>$version_string</Version>"
+  echo "    </PropertyGroup>"
+  echo "</Project>"
+}
+
 function update-changelog() {
   local lastVersionTag=$(get-prev-version-tag)
   say_set "last-version-tag" "$lastVersionTag"
@@ -327,6 +360,10 @@ while [ $# -ne 0 ]; do
 
     get)
       get-version
+      ;;
+
+    version-props)
+      create-version-props
       ;;
 
     changelog)

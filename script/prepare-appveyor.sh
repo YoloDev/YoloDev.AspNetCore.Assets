@@ -3,3 +3,11 @@ if ! [[ "$APPVEYOR_PULL_REQUEST_NUMBER" == "" ]]; then
 else
   git checkout -B "$APPVEYOR_REPO_BRANCH"
 fi
+
+pushd sample/SampleApp
+npm install
+popd
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+VERSION=$("$DIR/git-version.sh" get)
+appveyor UpdateBuild -Version "$VERSION ($APPVEYOR_BUILD_NUMBER)"
