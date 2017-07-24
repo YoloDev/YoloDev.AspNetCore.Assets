@@ -11,5 +11,4 @@ function __exec($cmd) {
   }
 }
 
-__exec dotnet pack .\src\YoloDev.AspNetCore.Assets\YoloDev.AspNetCore.Assets.csproj
-#__exec dotnet publish .\src\YoloDev.AspNetCore.Assets\YoloDev.AspNetCore.Assets.csproj --framework net461
+__exec dotnet pack .\src\YoloDev.AspNetCore.Assets\YoloDev.AspNetCore.Assets.csproj --include-symbols
