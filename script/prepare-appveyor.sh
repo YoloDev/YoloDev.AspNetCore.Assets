@@ -6,6 +6,9 @@ fi
 
 if [[ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]]; then
   git fetch origin master:master
+else
+  echo "git rev-parse --abbrev-ref HEAD:"
+  git rev-parse --abbrev-ref HEAD
 fi
 
 pushd sample/SampleApp
