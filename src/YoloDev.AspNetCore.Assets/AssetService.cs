@@ -32,7 +32,7 @@ namespace YoloDev.AspNetCore.Assets
         throw new ArgumentException("Path cannot be empty", nameof(path));
       }
 
-      if (_options.Value.UseDevelopmentAssets)
+      if (_options.Value.ForPath(path).UseDevelopmentAssets)
       {
         return GetBasePath(context).Add(path);
       }
