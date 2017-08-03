@@ -44,4 +44,7 @@ if test ! -d $buildFolder; then
 fi
 
 $buildFile -r $repoFolder "$@"
+exit_code=$?
 popd
+
+exit exit_code
