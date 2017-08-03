@@ -3,7 +3,7 @@
     <PropertyGroup>
       <GitVersionExec><![CDATA[
         set PATH=/usr/bin;%PATH%
-        sh -c "bash '$(MSBuildThisFileDirectory)script/git-version.sh' get"
+        sh -c "bash '$(MSBuildThisFileDirectory)/../script/git-version.sh' get"
       ]]></GitVersionExec>
     </PropertyGroup>
 

@@ -1,5 +1,5 @@
 init:
-  - git config --global core.autocrlf true
+  - git config --global core.autocrlf input
 
 clone_depth: 1
 test: off
@@ -20,7 +20,7 @@ before_build:
 
 build_script:
   - ps: .\build.ps1
-  - ps: .\publish.ps1
+  - ps: .\script\publish.ps1
 
 artifacts:
   - path: src/*/bin/**/*.nupkg
