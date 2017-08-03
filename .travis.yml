@@ -20,3 +20,7 @@ before_install:
   - bash ./script/git-version.sh --verbose get
 script:
   - ./build.sh
+
+cache:
+  directories:
+    - $HOME/.dotnet
