@@ -3,7 +3,7 @@ namespace YoloDev.AspNetCore.Assets.Options
   public class PathOptions : IPathOptions
   {
     public static PathOptions Default() => new PathOptions(
-      useDevelopmentAssets: true,
+      useDevelopmentAssets: false,
       devServer: null);
 
     private DelegatedValue<bool> _useDevelopmentAssets;

@@ -366,6 +366,11 @@ while [ $# -ne 0 ]; do
       verbose=true
       ;;
 
+    --dir)
+      pushd "$2" > /dev/null
+      shift
+      ;;
+
     get)
       get-version
       ;;

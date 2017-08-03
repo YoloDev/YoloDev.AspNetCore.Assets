@@ -32,19 +32,14 @@ namespace YoloDev.AspNetCore.Assets
     {
       var segments = path.Value.Substring(1).Split('/');
       var dir = path.Value.EndsWith("/");
-      var parentPath = new PathString(string.Join("/", segments.Take(segments.Length - 1)) + (dir ? "/" : ""));
+      var parentPath = new PathString("/" + string.Join("/", segments.Take(segments.Length - 1)) + (dir ? "/" : ""));
       var parent = ForPath(parentPath);
       return new PathOptions(parent);
     }
 
     public PathOptions ForPath(PathString path)
     {
-      if (!path.HasValue)
-      {
-        throw new ArgumentException("Path has no value", nameof(path));
-      }
-
-      if (path == "/")
+      if (!path.HasValue || path == "/")
       {
         return _base;
       }
