@@ -23,7 +23,7 @@ build_script:
   - ps: .\script\publish.ps1
 
 artifacts:
-  - path: src/*/bin/**/*.nupkg
+  - path: bin/*.nupkg
 
 deploy:
   - provider: Environment
