@@ -15,7 +15,10 @@ function __exec($cmd) {
 }
 
 $bindir = Join-Path (Get-ScriptDirectory) "../bin"
-Remove-Item -Recurse -Force $bindir
+if (Test-Path $bindir) {
+  Remove-Item -Recurse -Force $bindir
+}
+
 $projects = Get-ChildItem src/**/*.csproj
 foreach ($project in $projects) {
   __exec dotnet pack "$project" "-c" "release" "-o" "$bindir" "/v:m" "/p:ci=true"
@@ -32,5 +35,3 @@ try {
 finally {
   Pop-Location
 }
-
-#__exec dotnet pack .\src\YoloDev.AspNetCore.Assets\YoloDev.AspNetCore.Assets.csproj --include-symbols --include-source
