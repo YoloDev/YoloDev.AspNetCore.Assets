@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 using YoloDev.AspNetCore.Assets.Options;
@@ -16,10 +15,10 @@ namespace YoloDev.AspNetCore.Assets
       set => _base.UseDevelopmentAssets = value;
     }
 
-    public string DevServer {
-      get => _base.DevServer;
-      set => _base.DevServer = value;
-    }
+    //public string DevServer {
+    //  get => _base.DevServer;
+    //  set => _base.DevServer = value;
+    //}
 
     public AssetOptions() : this(PathOptions.Default()) { }
 
@@ -48,10 +47,10 @@ namespace YoloDev.AspNetCore.Assets
     }
 
     public IPathOptions Set(
-      Optional<bool> useDevelopmentAssets = default(Optional<bool>),
-      Optional<string> devServer = default(Optional<string>))
+      Optional<bool> useDevelopmentAssets = default(Optional<bool>)/*,
+      Optional<string> devServer = default(Optional<string>)*/)
     {
-      _base.Set(useDevelopmentAssets, devServer);
+      _base.Set(useDevelopmentAssets/*, devServer*/);
 
       return this;
     }
