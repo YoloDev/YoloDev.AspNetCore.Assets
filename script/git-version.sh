@@ -338,9 +338,22 @@ function update-changelog() {
 
   cp package.json package.json.tmp
   jq ".version=\"$nextVersion\"" < package.json.tmp > package.json
-  yarn run conventional-changelog -- -p eslint -i CHANGELOG.md -s
+  ./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s
   rm package.json
   mv package.json.tmp package.json
+}
+
+function add-changelog-to-git() {
+  git add CHANGELOG.md
+}
+
+function create-release-commit() {
+  local lastVersionTag=$(get-prev-version-tag)
+  say_set "last-version-tag" "$lastVersionTag"
+  local nextVersion=$(get-next-full-version "$lastVersionTag")
+  say_set "next-full-version" "$nextVersion"
+
+  git commit -m "Release: v$nextVersion"
 }
 
 function create-version-tag() {
@@ -381,6 +394,13 @@ while [ $# -ne 0 ]; do
 
     changelog)
       update-changelog
+      ;;
+
+    release)
+      update-changelog
+      add-changelog-to-git
+      create-release-commit
+      create-version-tag
       ;;
 
     tag)
