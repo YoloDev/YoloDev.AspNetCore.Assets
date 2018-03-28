@@ -2,8 +2,7 @@
   <Target Name="SetVersion" BeforeTargets="Build;Pack">
     <PropertyGroup>
       <GitVersionExec><![CDATA[
-        set PATH=/usr/bin;%PATH%
-        sh -c "bash '$(MSBuildThisFileDirectory)/../script/git-version.sh' get"
+        bash '$(MSBuildThisFileDirectory)/script/git-version.sh' get
       ]]></GitVersionExec>
     </PropertyGroup>
 
@@ -17,6 +16,6 @@
     <CreateProperty Value="$(Version)">
       <Output PropertyName="PackageVersion" TaskParameter="Value"/>
     </CreateProperty>
-    <Message Text="Version: $(Version)" Importance="High" />
+    <!--<Message Text="Version: $(Version)" Importance="High" />-->
   </Target>
 </Project>

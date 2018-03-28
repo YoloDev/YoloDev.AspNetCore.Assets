@@ -1,0 +1,36 @@
+<Project>
+  <PropertyGroup>
+    <Authors>Aleksander Heintz</Authors>
+    <Product>YoloDev AspNet Assets Library</Product>
+    <RepositoryUrl>https://github.com/YoloDev/YoloDev.AspNetCore.Assets</RepositoryUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/YoloDev/YoloDev.AspNetCore.Assets</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <!-- Versions -->
+  <PropertyGroup>
+    <NewtonsoftJsonVersion>11.0.2</NewtonsoftJsonVersion>
+    <SystemCollectionsImmutableVersion>1.4.0</SystemCollectionsImmutableVersion>
+    <MicrosoftAspNetCoreVersion>2.0.2</MicrosoftAspNetCoreVersion>
+    <MicrosoftAspNetCoreMvcVersion>2.0.3</MicrosoftAspNetCoreMvcVersion>
+    <MicrosoftAspNetCoreStaticFilesVersion>2.0.2</MicrosoftAspNetCoreStaticFilesVersion>
+    <MicrosoftAspNetCoreRazorRuntimeVersion>2.0.2</MicrosoftAspNetCoreRazorRuntimeVersion>
+    <MicrosoftAspNetCoreHttpAbstractionsVersion>2.0.2</MicrosoftAspNetCoreHttpAbstractionsVersion>
+    <MicrosoftAspNetCoreHostingAbstractionsVersion>2.0.2</MicrosoftAspNetCoreHostingAbstractionsVersion>
+    <MicrosoftAspNetCoreMvcViewFeaturesVersion>2.0.3</MicrosoftAspNetCoreMvcViewFeaturesVersion>
+    <MicrosoftExtensionsLoggingDebugVersion>2.0.1</MicrosoftExtensionsLoggingDebugVersion>
+    <MicrosoftVisualStudioWebBrowserLinkVersion>2.0.2</MicrosoftVisualStudioWebBrowserLinkVersion>
+    <MicrosoftVisualStudioWebCodeGenerationDesignVersion>2.0.3</MicrosoftVisualStudioWebCodeGenerationDesignVersion>
+    <MicrosoftVisualStudioWebCodeGenerationToolsVersion>2.0.3</MicrosoftVisualStudioWebCodeGenerationToolsVersion>
+    <MicrosoftAspNetCoreMvcFormattersXmlVersion>2.0.3</MicrosoftAspNetCoreMvcFormattersXmlVersion>
+
+    <!-- Testing -->
+    <TestSdkVersion>15.6.2</TestSdkVersion>
+    <XUnitVersion>2.3.1</XUnitVersion>
+    <FakeItEasyVersion>4.5.1</FakeItEasyVersion>
+  </PropertyGroup>
+</Project>
