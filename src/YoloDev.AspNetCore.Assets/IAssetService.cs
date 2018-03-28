@@ -13,6 +13,6 @@ namespace YoloDev.AspNetCore.Assets
     /// </summary>
     /// <param name="path">The original asset path.</param>
     /// <returns>The runtime asset path.</returns>
-    Task<PathString> GetAsset(PathString path, HttpContext context);
+    Task<string> GetAsset(PathString path, HttpContext context);
   }
 }

@@ -1,13 +1,17 @@
+using Microsoft.AspNetCore.Http;
+
 namespace YoloDev.AspNetCore.Assets.Options
 {
-  public class PathOptions : IPathOptions
+  internal class PathOptions : IPathOptions
   {
-    public static PathOptions Default() => new PathOptions(
-      useDevelopmentAssets: false/*,
-      devServer: null*/);
+    public static PathOptions Default(PathString path) => new PathOptions(
+      path: path,
+      useDevelopmentAssets: false,
+      devServer: null);
 
+    private readonly PathString _path;
     private DelegatedValue<bool> _useDevelopmentAssets;
-    //private DelegatedValue<string> _devServer;
+    private DelegatedValue<DevServerOptions> _devServer;
 
     public bool UseDevelopmentAssets
     {
@@ -15,34 +19,39 @@ namespace YoloDev.AspNetCore.Assets.Options
       set => _useDevelopmentAssets = value;
     }
 
-    //public string DevServer
-    //{
-    //  get => _devServer;
-    //  set => _devServer = value;
-    //}
+    public string DevServer
+    {
+      get => _devServer.Value?.Url;
+      set => _devServer = new DevServerOptions(_path, value);
+    }
+
+    internal DevServerOptions DevServerOptions => _devServer;
 
     public IPathOptions Set(
-      Optional<bool> useDevelopmentAssets = default(Optional<bool>)/*,
-      Optional<string> devServer = default(Optional<string>)*/)
+      Optional<bool> useDevelopmentAssets = default(Optional<bool>),
+      Optional<string> devServer = default(Optional<string>))
     {
       useDevelopmentAssets.Set(ref _useDevelopmentAssets);
-      //devServer.Set(ref _devServer);
+      devServer.Set(ref _devServer, url => new DevServerOptions(_path, url));
 
       return this;
     }
 
     private PathOptions(
-      bool useDevelopmentAssets/*,
-      string devServer*/)
+      PathString path,
+      bool useDevelopmentAssets,
+      DevServerOptions devServer)
     {
+      _path = path;
       _useDevelopmentAssets = useDevelopmentAssets;
-      //_devServer = devServer;
+      _devServer = devServer;
     }
 
-    internal PathOptions(PathOptions parent)
+    internal PathOptions(PathString path, PathOptions parent)
     {
+      _path = path;
       _useDevelopmentAssets = new DelegatedValue<bool>(parent._useDevelopmentAssets);
-      //_devServer = new DelegatedValue<string>(parent._devServer);
+      _devServer = new DelegatedValue<DevServerOptions>(parent._devServer);
     }
   }
 }

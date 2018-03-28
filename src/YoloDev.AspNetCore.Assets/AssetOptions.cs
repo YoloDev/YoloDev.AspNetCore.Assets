@@ -8,19 +8,22 @@ namespace YoloDev.AspNetCore.Assets
   public class AssetOptions : IPathOptions
   {
     private readonly PathOptions _base;
-    private ImmutableDictionary<PathString, PathOptions> _options = ImmutableDictionary.Create<PathString, PathOptions>();
+    private ImmutableDictionary<PathString, PathOptions> _options =
+      ImmutableDictionary.Create<PathString, PathOptions>();
 
-    public bool UseDevelopmentAssets {
+    public bool UseDevelopmentAssets
+    {
       get => _base.UseDevelopmentAssets;
       set => _base.UseDevelopmentAssets = value;
     }
 
-    //public string DevServer {
-    //  get => _base.DevServer;
-    //  set => _base.DevServer = value;
-    //}
+    public string DevServer
+    {
+      get => _base.DevServer;
+      set => _base.DevServer = value;
+    }
 
-    public AssetOptions() : this(PathOptions.Default()) { }
+    public AssetOptions() : this(PathOptions.Default(PathString.Empty)) { }
 
     internal AssetOptions(PathOptions baseOptions)
     {
@@ -32,11 +35,13 @@ namespace YoloDev.AspNetCore.Assets
       var segments = path.Value.Substring(1).Split('/');
       var dir = path.Value.EndsWith("/");
       var parentPath = new PathString("/" + string.Join("/", segments.Take(segments.Length - 1)) + (dir ? "/" : ""));
-      var parent = ForPath(parentPath);
-      return new PathOptions(parent);
+      var parent = ForPathInternal(parentPath);
+      return new PathOptions(path, parent);
     }
 
-    public PathOptions ForPath(PathString path)
+    public IPathOptions ForPath(PathString path) => ForPathInternal(path);
+
+    internal PathOptions ForPathInternal(PathString path)
     {
       if (!path.HasValue || path == "/")
       {
@@ -47,10 +52,10 @@ namespace YoloDev.AspNetCore.Assets
     }
 
     public IPathOptions Set(
-      Optional<bool> useDevelopmentAssets = default(Optional<bool>)/*,
-      Optional<string> devServer = default(Optional<string>)*/)
+      Optional<bool> useDevelopmentAssets = default(Optional<bool>),
+      Optional<string> devServer = default(Optional<string>))
     {
-      _base.Set(useDevelopmentAssets/*, devServer*/);
+      _base.Set(useDevelopmentAssets, devServer);
 
       return this;
     }
