@@ -1,0 +1,5 @@
+# Asp.NET MVC Assets library
+
+| Windows                                                                                                                                                                               | Mac / Linux                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Build history](https://buildstats.info/appveyor/chart/YoloDev/yolodev-aspnetcore-assets?branch=master)](https://ci.appveyor.com/project/YoloDev/yolodev-aspnetcore-assets/history) | [![Build history](https://buildstats.info/travisci/chart/YoloDev/YoloDev.AspNetCore.Assets?branch=master)](https://travis-ci.org/YoloDev/YoloDev.AspNetCore.Assets) |
