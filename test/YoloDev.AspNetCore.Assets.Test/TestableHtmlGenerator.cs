@@ -46,7 +46,6 @@ namespace YoloDev.AspNetCore.Assets.Test
           metadataProvider,
           CreateUrlHelperFactory(urlHelper),
           new HtmlTestEncoder(),
-          new ClientValidatorCache(),
           new DefaultValidationHtmlAttributeProvider(options, metadataProvider, new ClientValidatorCache()))
     {
       _validationAttributes = validationAttributes;

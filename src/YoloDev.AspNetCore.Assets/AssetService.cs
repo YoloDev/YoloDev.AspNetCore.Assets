@@ -20,7 +20,7 @@ namespace YoloDev.AspNetCore.Assets
       _manifests = manifests;
     }
 
-    public async Task<PathString> GetAsset(PathString path, HttpContext context)
+    public async Task<string> GetAsset(PathString path, HttpContext context)
     {
       if (context == null)
       {
@@ -34,6 +34,19 @@ namespace YoloDev.AspNetCore.Assets
 
       if (_options.Value.ForPath(path).UseDevelopmentAssets)
       {
+        var devServer = _options.Value.ForPathInternal(path).DevServerOptions;
+        if (devServer != null)
+        {
+          var basePath = devServer.BasePath;
+          var url = devServer.Url;
+
+          // TODO: Better handling of relative paths
+          if (!path.StartsWithSegments(basePath, out PathString start, out PathString rel))
+            throw new InvalidOperationException($"Asset path config is wrong. The path {path} does not start with {basePath}.");
+
+          return url + rel;
+        }
+
         return GetBasePath(context).Add(path);
       }
 
@@ -42,13 +55,15 @@ namespace YoloDev.AspNetCore.Assets
       {
         return GetBasePath(context).Add(path);
       }
+      else
+      {
+        // TODO: Better handling of relative paths
+        if (!path.StartsWithSegments(PathUtils.Dir(manifest.Path), out PathString start, out PathString rel))
+          throw new InvalidOperationException("Manifest was not relative to asset");
 
-      // TODO: Better handling of relative paths
-      if (!path.StartsWithSegments(PathUtils.Dir(manifest.Path), out PathString start, out PathString rel))
-        throw new InvalidOperationException("Manifest was not relative to asset");
-
-      var rewrite = manifest.Resolve(rel);
-      return GetBasePath(context).Add(start).Add(rewrite);
+        var rewrite = manifest.Resolve(rel);
+        return GetBasePath(context).Add(start).Add(rewrite);
+      }
     }
 
     private static PathString GetBasePath(HttpContext context) =>

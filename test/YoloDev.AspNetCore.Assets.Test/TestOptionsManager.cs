@@ -7,7 +7,10 @@ namespace YoloDev.AspNetCore.Assets.Test
     where T : class, new()
   {
     public TestOptionsManager()
-      : base(Enumerable.Empty<IConfigureOptions<T>>())
+      : base(
+        new OptionsFactory<T>(
+          Enumerable.Empty<IConfigureOptions<T>>(),
+          Enumerable.Empty<IPostConfigureOptions<T>>()))
     {
     }
   }

@@ -1,3 +1,5 @@
+using System;
+
 namespace YoloDev.AspNetCore.Assets.Options
 {
   public struct Optional<T>
@@ -16,6 +18,14 @@ namespace YoloDev.AspNetCore.Assets.Options
       if (_hasValue)
       {
         delegatedValue = _value;
+      }
+    }
+
+    internal void Set<U>(ref DelegatedValue<U> delegatedValue, Func<T, U> map)
+    {
+      if (_hasValue)
+      {
+        delegatedValue = map(_value);
       }
     }
 

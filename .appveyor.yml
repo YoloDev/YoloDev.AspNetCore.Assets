@@ -12,18 +12,23 @@ install:
   - cmd: git fetch --depth 50
   - cmd: git fetch --tags --depth 50
   - cmd: git fetch origin master:master --depth 50
-  - cmd: bash ./script/prepare-appveyor.sh
+  # Install node
   - ps: Install-Product node ''
+  # Prepare appveyor
+  - cmd: bash ./script/prepare-appveyor.sh
+    # Display .NET Core info
+  - cmd: dotnet --info
+  # Restore build script
+  - cmd: dotnet restore build
 
 before_build:
   - cmd: bash ./script/git-version.sh --verbose get
 
 build_script:
-  - ps: .\build.ps1
-  - ps: .\script\publish.ps1
+  - cmd: dotnet build build
 
 artifacts:
-  - path: bin/*.nupkg
+  - path: artifacts/*.nupkg
 
 deploy:
   - provider: Environment

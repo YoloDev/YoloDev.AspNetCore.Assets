@@ -32,7 +32,8 @@ namespace SampleApp
       services.AddMvc();
       services.AddAssets(config =>
       {
-        config.UseDevelopmentAssets = false;
+        //config.UseDevelopmentAssets = false;
+        config.ForPath("/assets").DevServer = "http://localhost:8080/assets";
       });
     }
 
